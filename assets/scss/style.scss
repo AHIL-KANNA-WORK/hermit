@@ -158,10 +158,18 @@ table {
 
 .highlight {
     position: relative;
+  
+    // hover {
+      overflow: visible;
+  margin-right: -50px;
+  max-width: 100%;
+
 }
 
 .highlight pre {
+  position: relative;
     padding-right: 75px;
+    margin-right: -30vw;
 }
 
 .highlight-copy-btn {

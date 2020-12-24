@@ -79,12 +79,33 @@ const toggleToc = () => {
   document.getElementById('toc').classList.toggle('show-toc');
 }
 
+function selectText(node) {
+  var selection = window.getSelection();
+  var range = document.createRange();
+  range.selectNodeContents(node);
+  selection.removeAllRanges();
+  selection.addRange(range);
+  return selection;
+}
+
+const consoleout = (codeEl) => {
+  var selection = selectText(codeEl);
+}
+
+const listenAll = (elems, e, callback) => {
+  document.querySelectorAll(elems).forEach((ele)=>{
+    ele.addEventListener(e, () => {
+      callback(ele);
+    });
+  });
+}
 
 if (header !== null) {
   listen('#menu-btn', "click", toggleMobileMenu);
   listen('#toc-btn', "click", toggleToc);
   listen('#img-btn', "click", showImg);
   listen('.bg-img', "click", hideImg);
+  listenAll('code:not([class])', "dblclick", consoleout);
 
   document.querySelectorAll('.post-year').forEach((ele)=> {
     ele.addEventListener('click', () => {
@@ -99,4 +120,14 @@ if (header !== null) {
       toggleMobileMenu();
     }
   }, 250));
+}
+
+let toTop = document.querySelector('.to-top');
+
+if (toTop !== null) {
+
+  toTop.addEventListener('click', () => {
+    document.documentElement.scrollTop = 0;
+  });
+
 }
